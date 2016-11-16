@@ -186,6 +186,9 @@ public class DataRegistrar {
 
         // Entity Processors
 
+        dataManager.registerDataProcessorAndImpl(AreaCloudData.class, SpongeAreaCloudData.class,
+                ImmutableAreaCloudData.class, ImmutableSpongeAreaCloudData.class, new AreaCloudDataProcessor());
+
         dataManager.registerDataProcessorAndImpl(ArmorStandData.class, SpongeArmorStandData.class,
                 ImmutableArmorStandData.class, ImmutableSpongeArmorStandData.class, new ArmorStandDataProcessor());
 
@@ -661,7 +664,18 @@ public class DataRegistrar {
                 ImmutableBeaconData.class, ImmutableSpongeBeaconData.class, new BeaconDataProcessor());
 
         // Values
-
+        
+        dataManager.registerValueProcessor(Keys.AGE, new AreaCloudAgeValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_DURATION, new AreaCloudDurationValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_DURATION_ON_USE, new AreaCloudDurationOnUseValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_PARTICLE, new AreaCloudParticleValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_RADIUS, new AreaCloudRadiusValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_RADIUS_ON_USE, new AreaCloudRadiusOnUseValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_RADIUS_PER_TICK, new AreaCloudRadiusPerTickValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_REAPPLICATION_DELAY, new AreaCloudReapplicationDelayValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_WAIT_TIME, new AreaCloudWaitTimeValueProcessor());
+        dataManager.registerValueProcessor(Keys.COLOR, new AreaCloudColorValueProcessor());
+        dataManager.registerValueProcessor(Keys.POTION_EFFECTS, new AreaCloudPotionEffectsValueProcessor());
         dataManager.registerValueProcessor(Keys.FUSE_DURATION, new FuseDurationValueProcessor());
         dataManager.registerValueProcessor(Keys.TICKS_REMAINING, new TicksRemainingValueProcessor());
         dataManager.registerValueProcessor(Keys.HEALTH, new HealthValueProcessor());

@@ -52,6 +52,7 @@ import org.spongepowered.api.data.value.mutable.OptionalValue;
 import org.spongepowered.api.data.value.mutable.PatternListValue;
 import org.spongepowered.api.data.value.mutable.SetValue;
 import org.spongepowered.api.data.value.mutable.Value;
+import org.spongepowered.api.effect.particle.ParticleType;
 import org.spongepowered.api.effect.potion.PotionEffect;
 import org.spongepowered.api.effect.potion.PotionEffectType;
 import org.spongepowered.api.entity.EntitySnapshot;
@@ -547,6 +548,13 @@ public class KeyRegistryModule implements AdditionalCatalogRegistryModule<Key<?>
     public static final TypeToken<Value<ZombieType>> ZOMBIE_TYPE_VALUE_TOKEN = new TypeToken<Value<ZombieType>>() {
         private static final long serialVersionUID = -1;
     };
+    
+    public static final TypeToken<ParticleType> PARTICLE_TYPE_TOKEN = new TypeToken<ParticleType>() {
+        private static final long serialVersionUID = -1;
+    };
+    public static final TypeToken<Value<ParticleType>> PARTICLE_TYPE_VALUE_TOKEN = new TypeToken<Value<ParticleType>>() {
+        private static final long serialVersionUID = -1;
+    };
 
     public static KeyRegistryModule getInstance() {
         return Holder.INSTANCE;
@@ -971,6 +979,16 @@ public class KeyRegistryModule implements AdditionalCatalogRegistryModule<Key<?>
         this.fieldMap.put("infinite_pickup_delay", makeSingleKey(BOOLEAN_TOKEN, BOOLEAN_VALUE_TOKEN, of("InfinitePickupDelay"), "sponge:infinite_pickup_delay", "Infinite Pickup Delay"));
         this.fieldMap.put("despawn_delay", makeSingleKey(INTEGER_TOKEN, BOUNDED_INTEGER_VALUE_TOKEN, of("DespawnDelay"), "sponge:despawn_delay", "Despawn Delay"));
         this.fieldMap.put("pickup_delay", makeSingleKey(INTEGER_TOKEN, BOUNDED_INTEGER_VALUE_TOKEN, of("PickupDelay"), "sponge:pickup_delay", "Pickup Delay"));
+        
+        this.fieldMap.put("age", makeSingleKey(INTEGER_TOKEN, BOUNDED_INTEGER_VALUE_TOKEN, of("Age"), "sponge:age", "Age"));
+        this.fieldMap.put("area_cloud_duration", makeSingleKey(INTEGER_TOKEN, INTEGER_VALUE_TOKEN, of("AreaCloudDuration"), "sponge:area_cloud_duration", "AreaEffectCloud Duration"));
+        this.fieldMap.put("area_cloud_duration_on_use", makeSingleKey(INTEGER_TOKEN, INTEGER_VALUE_TOKEN, of("AreaCloudDurationOnUse"), "sponge:area_cloud_duration_one_use", "AreaEffectCloud DurationOnUse"));
+        this.fieldMap.put("area_cloud_particle", makeSingleKey(PARTICLE_TYPE_TOKEN, PARTICLE_TYPE_VALUE_TOKEN, of("AreaCloudParticle"), "sponge:area_cloud_particle", "AreaEffectCloud Particle"));
+        this.fieldMap.put("area_cloud_radius", makeSingleKey(FLOAT_TOKEN, FLOAT_VALUE_TOKEN, of("AreaCloudRadius"), "sponge:area_cloud_radius", "AreaEffectCloud Radius"));
+        this.fieldMap.put("area_cloud_radius_on_use", makeSingleKey(FLOAT_TOKEN, FLOAT_VALUE_TOKEN, of("AreaCloudRadiusOnUse"), "sponge:area_cloud_radius_on_use", "AreaEffectCloud RadiusOnUse"));
+        this.fieldMap.put("area_cloud_radius_per_tick", makeSingleKey(FLOAT_TOKEN, FLOAT_VALUE_TOKEN, of("AreaCloudRadiusPerTick"), "sponge:area_cloud_radius_per_tick", "AreaEffectCloud RadiusPerTick"));
+        this.fieldMap.put("area_cloud_reapplication_delay", makeSingleKey(INTEGER_TOKEN, INTEGER_VALUE_TOKEN, of("AreaCloudReapplicationDelay"), "sponge:area_cloud_reapplication_delay", "AreaEffectCloud ReapplicationDelay"));
+        this.fieldMap.put("area_cloud_wait_time", makeSingleKey(INTEGER_TOKEN, INTEGER_VALUE_TOKEN, of("AreaCloudWaitTime"), "sponge:area_cloud_wait_time", "AreaEffectCloud WaitTime"));
 
         for (Key<?> key : this.fieldMap.values()) {
             this.keyMap.put(key.getId().toLowerCase(Locale.ENGLISH), key);
