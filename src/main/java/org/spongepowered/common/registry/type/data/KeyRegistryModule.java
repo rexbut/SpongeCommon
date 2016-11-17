@@ -983,7 +983,7 @@ public class KeyRegistryModule implements AdditionalCatalogRegistryModule<Key<?>
         this.fieldMap.put("age", makeSingleKey(INTEGER_TOKEN, BOUNDED_INTEGER_VALUE_TOKEN, of("Age"), "sponge:age", "Age"));
         this.fieldMap.put("area_cloud_duration", makeSingleKey(INTEGER_TOKEN, INTEGER_VALUE_TOKEN, of("AreaCloudDuration"), "sponge:area_cloud_duration", "AreaEffectCloud Duration"));
         this.fieldMap.put("area_cloud_duration_on_use", makeSingleKey(INTEGER_TOKEN, INTEGER_VALUE_TOKEN, of("AreaCloudDurationOnUse"), "sponge:area_cloud_duration_one_use", "AreaEffectCloud DurationOnUse"));
-        this.fieldMap.put("area_cloud_particle", makeSingleKey(PARTICLE_TYPE_TOKEN, PARTICLE_TYPE_VALUE_TOKEN, of("AreaCloudParticle"), "sponge:area_cloud_particle", "AreaEffectCloud Particle"));
+        this.fieldMap.put("area_cloud_particle_type", makeSingleKey(PARTICLE_TYPE_TOKEN, PARTICLE_TYPE_VALUE_TOKEN, of("AreaCloudParticle"), "sponge:area_cloud_particle", "AreaEffectCloud Particle"));
         this.fieldMap.put("area_cloud_radius", makeSingleKey(FLOAT_TOKEN, FLOAT_VALUE_TOKEN, of("AreaCloudRadius"), "sponge:area_cloud_radius", "AreaEffectCloud Radius"));
         this.fieldMap.put("area_cloud_radius_on_use", makeSingleKey(FLOAT_TOKEN, FLOAT_VALUE_TOKEN, of("AreaCloudRadiusOnUse"), "sponge:area_cloud_radius_on_use", "AreaEffectCloud RadiusOnUse"));
         this.fieldMap.put("area_cloud_radius_per_tick", makeSingleKey(FLOAT_TOKEN, FLOAT_VALUE_TOKEN, of("AreaCloudRadiusPerTick"), "sponge:area_cloud_radius_per_tick", "AreaEffectCloud RadiusPerTick"));

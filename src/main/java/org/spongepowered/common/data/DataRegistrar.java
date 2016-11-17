@@ -664,11 +664,10 @@ public class DataRegistrar {
                 ImmutableBeaconData.class, ImmutableSpongeBeaconData.class, new BeaconDataProcessor());
 
         // Values
-        
-        dataManager.registerValueProcessor(Keys.AGE, new AreaCloudAgeValueProcessor());
+
         dataManager.registerValueProcessor(Keys.AREA_CLOUD_DURATION, new AreaCloudDurationValueProcessor());
         dataManager.registerValueProcessor(Keys.AREA_CLOUD_DURATION_ON_USE, new AreaCloudDurationOnUseValueProcessor());
-        dataManager.registerValueProcessor(Keys.AREA_CLOUD_PARTICLE, new AreaCloudParticleValueProcessor());
+        dataManager.registerValueProcessor(Keys.AREA_CLOUD_PARTICLE_TYPE, new AreaCloudParticleValueProcessor());
         dataManager.registerValueProcessor(Keys.AREA_CLOUD_RADIUS, new AreaCloudRadiusValueProcessor());
         dataManager.registerValueProcessor(Keys.AREA_CLOUD_RADIUS_ON_USE, new AreaCloudRadiusOnUseValueProcessor());
         dataManager.registerValueProcessor(Keys.AREA_CLOUD_RADIUS_PER_TICK, new AreaCloudRadiusPerTickValueProcessor());

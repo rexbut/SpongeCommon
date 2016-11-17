@@ -49,7 +49,7 @@ public class AreaCloudReapplicationDelayValueProcessor extends AbstractSpongeVal
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, Integer value) {
-    	container.setReapplicationDelay(value);
+        container.setReapplicationDelay(value);
         return true;
     }
 

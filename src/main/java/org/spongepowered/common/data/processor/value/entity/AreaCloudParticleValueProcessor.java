@@ -41,7 +41,7 @@ import java.util.Optional;
 public class AreaCloudParticleValueProcessor extends AbstractSpongeValueProcessor<IMixinAreaEffectCloud, ParticleType, Value<ParticleType>> {
 
     public AreaCloudParticleValueProcessor() {
-        super(IMixinAreaEffectCloud.class, Keys.AREA_CLOUD_PARTICLE);
+        super(IMixinAreaEffectCloud.class, Keys.AREA_CLOUD_PARTICLE_TYPE);
     }
 
     @Override
@@ -51,13 +51,12 @@ public class AreaCloudParticleValueProcessor extends AbstractSpongeValueProcesso
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, ParticleType value) {
-    	container.setParticle(value);
-        return true;
+    	return container.setParticleType(value);
     }
 
     @Override
     protected Optional<ParticleType> getVal(IMixinAreaEffectCloud container) {
-        return container.getParticle();
+        return container.getParticleType();
     }
 
     @Override

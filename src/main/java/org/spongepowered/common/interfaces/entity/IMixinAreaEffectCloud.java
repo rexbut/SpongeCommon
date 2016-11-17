@@ -24,45 +24,52 @@
  */
 package org.spongepowered.common.interfaces.entity;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.spongepowered.api.effect.particle.ParticleType;
 import org.spongepowered.api.effect.potion.PotionEffect;
 import org.spongepowered.api.util.Color;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface IMixinAreaEffectCloud {
 
-	int getAge();
-	void setAge(int age);
-	
-	int getDuration();
-	void setDuration(int duration);
-	
-	int getDurationOnUse();
-	void setDurationOnUse(int durationOnUse);
-	
-	Optional<ParticleType> getParticle();
-	void setParticle(ParticleType particle);
-	
-	float getRadius();
-	void setRadius(float radius);
-	
-	float getRadiusOnUse();
-	void setRadiusOnUse(float radiusOnUse);
-	
-	float getRadiusPerTick();
-	void setRadiusPerTick(float radiusPerTick);
-	
-	int getReapplicationDelay();
-	void setReapplicationDelay(int reapplicationDelay);
-	
-	int getWaitTime();
-	void setWaitTime(int waitTime);
-	
-	Color getColor();
-	void setColor(Color color);
-	
-	List<PotionEffect> getEffects();
-	void setEffects(List<PotionEffect> age);
+    int getDuration();
+
+    void setDuration(int duration);
+
+    int getDurationOnUse();
+
+    void setDurationOnUse(int durationOnUse);
+
+    Optional<ParticleType> getParticleType();
+
+    boolean setParticleType(ParticleType particle);
+
+    float getRadius();
+
+    void setRadius(float radius);
+
+    float getRadiusOnUse();
+
+    void setRadiusOnUse(float radiusOnUse);
+
+    float getRadiusPerTick();
+
+    void setRadiusPerTick(float radiusPerTick);
+
+    int getReapplicationDelay();
+
+    void setReapplicationDelay(int reapplicationDelay);
+
+    int getWaitTime();
+
+    void setWaitTime(int waitTime);
+
+    Color getColor();
+
+    void setColor(Color color);
+
+    List<PotionEffect> getEffects();
+
+    void setEffects(List<PotionEffect> age);
 }

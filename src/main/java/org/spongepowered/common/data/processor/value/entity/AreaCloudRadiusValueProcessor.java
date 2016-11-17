@@ -49,7 +49,7 @@ public class AreaCloudRadiusValueProcessor extends AbstractSpongeValueProcessor<
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, Float value) {
-    	container.setRadius(value);
+        container.setRadius(value);
         return true;
     }
 

@@ -60,26 +60,26 @@ public class AreaCloudDataProcessor extends AbstractEntityDataProcessor<EntityAr
     @Override
     @SuppressWarnings("unchecked")
     protected boolean set(EntityAreaEffectCloud dataHolder, Map<Key<?>, Object> keyValues) {
-    	final int age = (int) keyValues.get(Keys.AGE);
     	final int duration = (int) keyValues.get(Keys.AREA_CLOUD_DURATION);
     	final int durationOnUse = (int) keyValues.get(Keys.AREA_CLOUD_DURATION_ON_USE);
-    	final ParticleType particle = (ParticleType) keyValues.get(Keys.AREA_CLOUD_PARTICLE);
+    	final ParticleType particle = (ParticleType) keyValues.get(Keys.AREA_CLOUD_PARTICLE_TYPE);
     	final float radius = (float) keyValues.get(Keys.AREA_CLOUD_RADIUS);
         final float radiusOnUse = (float) keyValues.get(Keys.AREA_CLOUD_RADIUS_ON_USE);
         final float radiusPerTick = (float) keyValues.get(Keys.AREA_CLOUD_RADIUS_PER_TICK);
         final int reapplicationDelay = (int) keyValues.get(Keys.AREA_CLOUD_REAPPLICATION_DELAY);
+        final int waitTime = (int) keyValues.get(Keys.AREA_CLOUD_WAIT_TIME);
         final Color color = (Color) keyValues.get(Keys.COLOR);
 		final List<PotionEffect> effects = (List<PotionEffect>) keyValues.get(Keys.POTION_EFFECTS);
 
 		IMixinAreaEffectCloud entity = (IMixinAreaEffectCloud) dataHolder;
-		entity.setAge(age);
 		entity.setDuration(duration);
 		entity.setDurationOnUse(durationOnUse);
-		entity.setParticle(particle);
+		entity.setParticleType(particle);
 		entity.setRadius(radius);
 		entity.setRadiusOnUse(radiusOnUse);
 		entity.setRadiusPerTick(radiusPerTick);
 		entity.setReapplicationDelay(reapplicationDelay);
+		entity.setWaitTime(waitTime);
 		entity.setColor(color);
 		entity.setEffects(effects);
         return true;
@@ -89,14 +89,14 @@ public class AreaCloudDataProcessor extends AbstractEntityDataProcessor<EntityAr
     protected Map<Key<?>, ?> getValues(EntityAreaEffectCloud dataHolder) {
     	IMixinAreaEffectCloud entity = (IMixinAreaEffectCloud) dataHolder;
         return ImmutableMap.<Key<?>, Object>builder()
-                .put(Keys.AGE, entity.getAge())
                 .put(Keys.AREA_CLOUD_DURATION, entity.getDuration())
                 .put(Keys.AREA_CLOUD_DURATION_ON_USE, entity.getDurationOnUse())
-                .put(Keys.AREA_CLOUD_PARTICLE, entity.getParticle())
+                .put(Keys.AREA_CLOUD_PARTICLE_TYPE, entity.getParticleType())
                 .put(Keys.AREA_CLOUD_RADIUS, entity.getRadius())
                 .put(Keys.AREA_CLOUD_RADIUS_ON_USE, entity.getRadiusOnUse())
                 .put(Keys.AREA_CLOUD_RADIUS_PER_TICK, entity.getRadiusPerTick())
                 .put(Keys.AREA_CLOUD_REAPPLICATION_DELAY, entity.getReapplicationDelay())
+                .put(Keys.AREA_CLOUD_WAIT_TIME, entity.getWaitTime())
                 .put(Keys.COLOR, entity.getColor())
                 .put(Keys.POTION_EFFECTS, entity.getEffects())
                 .build();
@@ -109,17 +109,14 @@ public class AreaCloudDataProcessor extends AbstractEntityDataProcessor<EntityAr
 
     @Override
     public Optional<AreaCloudData> fill(DataContainer container, AreaCloudData areaCloudData) {
-        if (container.contains(Keys.AGE)) {
-        	areaCloudData.set(Keys.AGE, container.getInt(Keys.AGE.getQuery()).get());
-        }
         if (container.contains(Keys.AREA_CLOUD_DURATION)) {
         	areaCloudData.set(Keys.AREA_CLOUD_DURATION, container.getInt(Keys.AREA_CLOUD_DURATION.getQuery()).get());
         }
         if (container.contains(Keys.AREA_CLOUD_DURATION_ON_USE)) {
         	areaCloudData.set(Keys.AREA_CLOUD_DURATION_ON_USE, container.getInt(Keys.AREA_CLOUD_DURATION_ON_USE.getQuery()).get());
         }
-        if (container.contains(Keys.AREA_CLOUD_PARTICLE)) {
-        	areaCloudData.set(Keys.AREA_CLOUD_PARTICLE, container.getObject(Keys.AREA_CLOUD_PARTICLE.getQuery(), ParticleType.class).get());
+        if (container.contains(Keys.AREA_CLOUD_PARTICLE_TYPE)) {
+        	areaCloudData.set(Keys.AREA_CLOUD_PARTICLE_TYPE, container.getObject(Keys.AREA_CLOUD_PARTICLE_TYPE.getQuery(), ParticleType.class).get());
         }
         if (container.contains(Keys.AREA_CLOUD_RADIUS)) {
         	areaCloudData.set(Keys.AREA_CLOUD_RADIUS, container.getFloat(Keys.AREA_CLOUD_RADIUS.getQuery()).get());
@@ -132,6 +129,9 @@ public class AreaCloudDataProcessor extends AbstractEntityDataProcessor<EntityAr
         }
         if (container.contains(Keys.AREA_CLOUD_REAPPLICATION_DELAY)) {
         	areaCloudData.set(Keys.AREA_CLOUD_REAPPLICATION_DELAY, container.getInt(Keys.AREA_CLOUD_REAPPLICATION_DELAY.getQuery()).get());
+        }
+        if (container.contains(Keys.AREA_CLOUD_WAIT_TIME)) {
+        	areaCloudData.set(Keys.AREA_CLOUD_WAIT_TIME, container.getInt(Keys.AREA_CLOUD_WAIT_TIME.getQuery()).get());
         }
         if (container.contains(Keys.COLOR)) {
         	areaCloudData.set(Keys.COLOR, container.getObject(Keys.COLOR.getQuery(), Color.class).get());

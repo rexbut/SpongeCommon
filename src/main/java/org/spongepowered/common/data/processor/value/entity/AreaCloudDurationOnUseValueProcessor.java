@@ -49,7 +49,7 @@ public class AreaCloudDurationOnUseValueProcessor extends AbstractSpongeValuePro
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, Integer value) {
-    	container.setDurationOnUse(value);
+        container.setDurationOnUse(value);
         return true;
     }
 

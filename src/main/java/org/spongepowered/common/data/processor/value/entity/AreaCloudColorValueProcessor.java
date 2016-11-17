@@ -50,7 +50,7 @@ public class AreaCloudColorValueProcessor extends AbstractSpongeValueProcessor<I
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, Color value) {
-    	container.setColor(value);
+        container.setColor(value);
         return true;
     }
 

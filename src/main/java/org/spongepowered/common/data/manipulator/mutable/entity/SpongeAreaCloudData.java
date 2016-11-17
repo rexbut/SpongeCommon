@@ -24,14 +24,12 @@
  */
 package org.spongepowered.common.data.manipulator.mutable.entity;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.spongepowered.api.data.DataContainer;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.immutable.entity.ImmutableAreaCloudData;
 import org.spongepowered.api.data.manipulator.mutable.entity.AreaCloudData;
 import org.spongepowered.api.data.value.mutable.ListValue;
-import org.spongepowered.api.data.value.mutable.MutableBoundedValue;
 import org.spongepowered.api.data.value.mutable.Value;
 import org.spongepowered.api.effect.particle.ParticleType;
 import org.spongepowered.api.effect.particle.ParticleTypes;
@@ -39,15 +37,13 @@ import org.spongepowered.api.effect.potion.PotionEffect;
 import org.spongepowered.api.util.Color;
 import org.spongepowered.common.data.ImmutableDataCachingUtil;
 import org.spongepowered.common.data.manipulator.mutable.common.AbstractData;
-import org.spongepowered.common.data.value.SpongeValueFactory;
 import org.spongepowered.common.data.value.mutable.SpongeListValue;
 import org.spongepowered.common.data.value.mutable.SpongeValue;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAreaCloudData> implements AreaCloudData {
 
-    private int angerLevel;
     private int duration;
     private int durationOnUse;
     private ParticleType particle;
@@ -60,13 +56,12 @@ public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAr
     private List<PotionEffect> effects;
 
     public SpongeAreaCloudData() {
-        this(0, 600, 0, ParticleTypes.MOB_SPELL, 0.5F, 0F, 0F, 20, 20, Color.BLACK, Lists.<PotionEffect>newArrayList());
+        this(600, 0, ParticleTypes.MOB_SPELL, 3F, 0F, 0F, 20, 20, Color.BLACK, Lists.<PotionEffect>newArrayList());
     }
 
-    public SpongeAreaCloudData(int angerLevel, int duration, int durationOnUse, ParticleType particle, float radius, 
-            float radiusOnUse, float radiusPerTick, int reapplicationDelay, int waitTime, Color color, List<PotionEffect> effects) {
+    public SpongeAreaCloudData(int duration, int durationOnUse, ParticleType particle, float radius, float radiusOnUse, 
+            float radiusPerTick, int reapplicationDelay, int waitTime, Color color, List<PotionEffect> effects) {
         super(AreaCloudData.class);
-        this.angerLevel = angerLevel;
         this.duration = duration;
         this.durationOnUse = durationOnUse;
         this.particle = particle;
@@ -82,10 +77,6 @@ public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAr
 
     @Override
     protected void registerGettersAndSetters() {
-        registerFieldGetter(Keys.AGE, () -> this.angerLevel);
-        registerFieldSetter(Keys.AGE, (angerLevel) -> this.angerLevel = angerLevel);
-        registerKeyValue(Keys.AGE, this::angerLevel);
-
         registerFieldGetter(Keys.AREA_CLOUD_DURATION, () -> this.duration);
         registerFieldSetter(Keys.AREA_CLOUD_DURATION, (duration) -> this.duration = duration);
         registerKeyValue(Keys.AREA_CLOUD_DURATION, this::duration);
@@ -94,9 +85,9 @@ public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAr
         registerFieldSetter(Keys.AREA_CLOUD_DURATION_ON_USE, (durationOnUse) -> this.durationOnUse = durationOnUse);
         registerKeyValue(Keys.AREA_CLOUD_DURATION_ON_USE, this::durationOnUse);
 
-        registerFieldGetter(Keys.AREA_CLOUD_PARTICLE, () -> this.particle);
-        registerFieldSetter(Keys.AREA_CLOUD_PARTICLE, (particle) -> this.particle = particle);
-        registerKeyValue(Keys.AREA_CLOUD_PARTICLE, this::particle);
+        registerFieldGetter(Keys.AREA_CLOUD_PARTICLE_TYPE, () -> this.particle);
+        registerFieldSetter(Keys.AREA_CLOUD_PARTICLE_TYPE, (particle) -> this.particle = particle);
+        registerKeyValue(Keys.AREA_CLOUD_PARTICLE_TYPE, this::particleType);
 
         registerFieldGetter(Keys.AREA_CLOUD_RADIUS, () -> this.radius);
         registerFieldSetter(Keys.AREA_CLOUD_RADIUS, (radius) -> this.radius = radius);
@@ -128,16 +119,6 @@ public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAr
     }
 
     @Override
-    public MutableBoundedValue<Integer> angerLevel() {
-        return SpongeValueFactory.boundedBuilder(Keys.ANGER)
-                .actualValue(this.angerLevel)
-                .defaultValue(0)
-                .minimum(0)
-                .maximum(Integer.MAX_VALUE)
-                .build();
-    }
-
-    @Override
     public Value<Integer> duration() {
         return new SpongeValue<>(Keys.AREA_CLOUD_DURATION, 600, this.duration);
     }
@@ -148,13 +129,13 @@ public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAr
     }
 
     @Override
-    public Value<ParticleType> particle() {
-        return new SpongeValue<>(Keys.AREA_CLOUD_PARTICLE, ParticleTypes.MOB_SPELL, this.particle);
+    public Value<ParticleType> particleType() {
+        return new SpongeValue<>(Keys.AREA_CLOUD_PARTICLE_TYPE, ParticleTypes.MOB_SPELL, this.particle);
     }
 
     @Override
     public Value<Float> radius() {
-        return new SpongeValue<>(Keys.AREA_CLOUD_RADIUS, 0.5F, this.radius);
+        return new SpongeValue<>(Keys.AREA_CLOUD_RADIUS, 3F, this.radius);
     }
 
     @Override
@@ -189,28 +170,27 @@ public class SpongeAreaCloudData extends AbstractData<AreaCloudData, ImmutableAr
 
     @Override
     public AreaCloudData copy() {
-        return new SpongeAreaCloudData(this.angerLevel, this.duration, this.durationOnUse, this.particle, this.radius, 
-                this.radiusOnUse, this.radiusPerTick, this.reapplicationDelay, this.waitTime, this.color, this.effects);
+        return new SpongeAreaCloudData(this.duration, this.durationOnUse, this.particle, this.radius, this.radiusOnUse, 
+                this.radiusPerTick, this.reapplicationDelay, this.waitTime, this.color, this.effects);
     }
 
     @Override
     public ImmutableAreaCloudData asImmutable() {
-        return ImmutableDataCachingUtil.getManipulator(ImmutableAreaCloudData.class, 
-                this.angerLevel, this.duration, this.durationOnUse, this.particle, 
-                this.radius, this.radiusOnUse, this.radiusPerTick, this.reapplicationDelay, this.color, this.effects);
+        return ImmutableDataCachingUtil.getManipulator(ImmutableAreaCloudData.class, this.duration, this.durationOnUse, 
+                this.particle, this.radius, this.radiusOnUse, this.radiusPerTick, this.reapplicationDelay, this.color, this.effects);
     }
 
     @Override
     public DataContainer toContainer() {
         return super.toContainer()
-                .set(Keys.ANGER, this.angerLevel)
                 .set(Keys.AREA_CLOUD_DURATION, this.duration)
                 .set(Keys.AREA_CLOUD_DURATION_ON_USE, this.durationOnUse)
-                .set(Keys.AREA_CLOUD_PARTICLE, this.particle)
+                .set(Keys.AREA_CLOUD_PARTICLE_TYPE, this.particle)
                 .set(Keys.AREA_CLOUD_RADIUS, this.radius)
                 .set(Keys.AREA_CLOUD_RADIUS_ON_USE, this.radiusOnUse)
                 .set(Keys.AREA_CLOUD_RADIUS_PER_TICK, this.radiusPerTick)
                 .set(Keys.AREA_CLOUD_REAPPLICATION_DELAY, this.reapplicationDelay)
+                .set(Keys.AREA_CLOUD_WAIT_TIME, this.waitTime)
                 .set(Keys.COLOR, this.color)
                 .set(Keys.POTION_EFFECTS, this.effects);
     }

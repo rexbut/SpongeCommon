@@ -44,12 +44,12 @@ public class AreaCloudRadiusOnUseValueProcessor extends AbstractSpongeValueProce
 
     @Override
     protected Value<Float> constructValue(Float actualValue) {
-        return new SpongeValue<>(this.key, 0F, actualValue);
+        return new SpongeValue<>(this.key, 3F, actualValue);
     }
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, Float value) {
-    	container.setRadiusOnUse(value);
+        container.setRadiusOnUse(value);
         return true;
     }
 
@@ -60,7 +60,7 @@ public class AreaCloudRadiusOnUseValueProcessor extends AbstractSpongeValueProce
 
     @Override
     protected ImmutableValue<Float> constructImmutableValue(Float value) {
-        return ImmutableSpongeValue.cachedOf(this.key, 0F, value);
+        return ImmutableSpongeValue.cachedOf(this.key, 3F, value);
     }
 
     @Override

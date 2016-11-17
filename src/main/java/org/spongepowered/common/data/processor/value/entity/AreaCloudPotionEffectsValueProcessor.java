@@ -24,6 +24,7 @@
  */
 package org.spongepowered.common.data.processor.value.entity;
 
+import com.google.common.collect.ImmutableList;
 import org.spongepowered.api.data.DataTransactionResult;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.value.ValueContainer;
@@ -34,8 +35,6 @@ import org.spongepowered.common.data.processor.common.AbstractSpongeValueProcess
 import org.spongepowered.common.data.value.immutable.ImmutableSpongeListValue;
 import org.spongepowered.common.data.value.mutable.SpongeListValue;
 import org.spongepowered.common.interfaces.entity.IMixinAreaEffectCloud;
-
-import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +52,7 @@ public class AreaCloudPotionEffectsValueProcessor extends AbstractSpongeValuePro
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, List<PotionEffect> value) {
-    	container.setEffects(value);
+        container.setEffects(value);
         return true;
     }
 

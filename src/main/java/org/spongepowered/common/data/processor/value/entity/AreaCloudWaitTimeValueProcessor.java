@@ -49,7 +49,7 @@ public class AreaCloudWaitTimeValueProcessor extends AbstractSpongeValueProcesso
 
     @Override
     protected boolean set(IMixinAreaEffectCloud container, Integer value) {
-    	container.setWaitTime(value);
+        container.setWaitTime(value);
         return true;
     }
 
