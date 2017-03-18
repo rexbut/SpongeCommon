@@ -1116,10 +1116,7 @@ public class KeyRegistryModule implements AdditionalCatalogRegistryModule<Key<?>
 
     @Override
     public Optional<Key<?>> getById(String id) {
-        if (checkNotNull(id, "Key id cannot be null!").contains("sponge:")) {
-            id = id.replace("sponge:", "");
-        }
-        return Optional.ofNullable(this.keyMap.get(id));
+        return Optional.ofNullable(this.keyMap.get(checkNotNull(id).toLowerCase(Locale.ENGLISH)));
     }
 
     @Override
